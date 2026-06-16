@@ -1,0 +1,16 @@
+.logo-container{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.nav-menu{
+    display:flex;
+    gap:20px;
+    list-style:none;
+    padding:0;
+}
+
+.hero{
+    margin-top:40px;
+}
