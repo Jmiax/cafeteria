@@ -4,44 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Cafetería</title>
-
-    <link rel="stylesheet" href="/css/bootstrap.css">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
 
-<header class="bg-primary text-white p-4">
+<header>
     <div class="container">
-        <h1>Sistema de Cafetería</h1>
+        <div class="logo-container">
+            <div class="logo-icon">☕</div>
+            <h1>Sistema de <span>Cafetería</span></h1>
+        </div>
 
         <nav>
-            <a href="#" class="text-white me-3" onclick="return false;">Inicio</a>
-            <a href="#" class="text-white me-3" onclick="return false;">Productos</a>
-            <a href="#" class="text-white me-3" onclick="return false;">Categorías</a>
-            <a href="#" class="text-white me-3" onclick="return false;">Tamaños</a>
-            <a href="#" class="text-white" onclick="return false;">Proveedores</a>
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link active" onclick="return false;">Inicio</a></li>
+                <li><a href="#" class="nav-link" onclick="return false;">Productos</a></li>
+                <li><a href="#" class="nav-link" onclick="return false;">Categorías</a></li>
+                <li><a href="#" class="nav-link" onclick="return false;">Tamaños</a></li>
+                <li><a href="#" class="nav-link" onclick="return false;">Proveedores</a></li>
+            </ul>
         </nav>
     </div>
 </header>
-<section class="container mt-5">
-    <div class="card p-4 shadow-sm text-center">
 
-		<img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"
-		     alt="Cafetería"
-		     class="img-fluid rounded mx-auto d-block mb-4"
-		     style="max-width: 400px;">
+<section class="hero">
+    <div class="container hero-grid">
+        <div class="hero-content">
+            <h2>Bienvenido al Sistema de Gestión de Cafetería</h2>
+            <p>
+                Sistema diseñado para administrar productos, categorías,
+                tamaños y proveedores de manera organizada.
+            </p>
+            <a href="#" class="btn-decorative" onclick="return false;">Hacer pedido</a>
+        </div>
 
-        <h2>Bienvenido al Sistema de Gestión de Cafetería</h2>
-
-        <p>
-            Sistema diseñado para administrar productos, categorías,
-            tamaños y proveedores de manera organizada.
-        </p>
-
-        <a href="#" class="btn btn-primary" onclick="return false;">
-            Hacer pedido
-        </a>
-
+        <div class="hero-image-container">
+            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"
+                 alt="Cafetería"
+                 class="hero-image">
+            <div class="hero-image-overlay"></div>
+        </div>
     </div>
 </section>
 
