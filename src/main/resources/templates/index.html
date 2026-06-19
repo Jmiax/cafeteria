@@ -1,51 +1,44 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Cafetería</title>
-    <link rel="stylesheet" href="/css/style.css">
+
+    <th:block th:replace="~{fragmentos :: bootstrap}"></th:block>
 </head>
+
 <body>
 
-<header>
-    <div class="container">
-        <div class="logo-container">
-            <div class="logo-icon">☕</div>
-            <h1>Sistema de <span>Cafetería</span></h1>
-        </div>
+    <div th:replace="~{fragmentos :: menu}"></div>
 
-        <nav>
-            <ul class="nav-menu">
-                <li><a href="#" class="nav-link active" onclick="return false;">Inicio</a></li>
-                <li><a href="#" class="nav-link" onclick="return false;">Productos</a></li>
-                <li><a href="#" class="nav-link" onclick="return false;">Categorías</a></li>
-                <li><a href="#" class="nav-link" onclick="return false;">Tamaños</a></li>
-                <li><a href="#" class="nav-link" onclick="return false;">Proveedores</a></li>
-            </ul>
-        </nav>
-    </div>
-</header>
+    <section class="hero">
+        <div class="container hero-grid">
 
-<section class="hero">
-    <div class="container hero-grid">
-        <div class="hero-content">
-            <h2>Bienvenido al Sistema de Gestión de Cafetería</h2>
-            <p>
-                Sistema diseñado para administrar productos, categorías,
-                tamaños y proveedores de manera organizada.
-            </p>
-            <a href="#" class="btn-decorative" onclick="return false;">Hacer pedido</a>
-        </div>
+            <div class="hero-content">
+                <h2>Bienvenido al Sistema de Gestión de Cafetería</h2>
 
-        <div class="hero-image-container">
-            <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"
-                 alt="Cafetería"
-                 class="hero-image">
-            <div class="hero-image-overlay"></div>
+                <p>
+                    Sistema diseñado para administrar productos,
+                    categorías, tamaños y proveedores de manera organizada.
+                </p>
+
+                <a href="#" class="btn-decorative">
+                    Hacer pedido
+                </a>
+            </div>
+
+            <div class="hero-image-container">
+                <img
+                    src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"
+                    alt="Cafetería"
+                    class="hero-image">
+
+                <div class="hero-image-overlay"></div>
+            </div>
+
         </div>
-    </div>
-</section>
+    </section>
 
 </body>
+
 </html>
