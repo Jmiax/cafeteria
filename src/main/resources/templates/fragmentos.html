@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<body>
+    <th:block th:fragment="bootstrap">
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        
+        <link rel="stylesheet" th:href="@{/css/style.css}">
+
+       
+    </th:block>
+    <header th:fragment="menu">
+        <div class="container">
+            <div class="logo-container">
+                <div class="logo-icon">☕</div>
+                <h1>Sistema de <span>Cafetería</span></h1>
+            </div>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li>
+                        <a th:href="@{/}" class="nav-link active">Inicio</a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/rutaProductos/listar}" class="nav-link">
+                            Productos
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/rutaCategorias/listar}" class="nav-link">
+                            Categorías
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/tamanios/listar}" class="nav-link">
+                            Tamaños
+                        </a>
+                    </li>
+
+                    <li>
+                        <a th:href="@{/rutaProveedores/listar}" class="nav-link">
+                            Proveedores
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+</body>
+</html>

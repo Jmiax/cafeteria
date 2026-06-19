@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Productos</title>
+
+    <th:block th:replace="~{fragmentos :: bootstrap}"></th:block>
+
+    <!-- TU CSS -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div th:replace="~{fragmentos :: menu}"></div>
+
+<div class="container mt-4">
+
+    <div class="table-container">
+
+        <div class="table-header">
+            <span class="table-title">Lista de Productos</span>
+
+            <a th:href="@{/rutaProductos/nuevo}" class="btn-decorative">
+                ➕ Nuevo Producto
+            </a>
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="custom-table">
+
+                <thead>
+                    <tr>
+                        <th>Imagen</th>
+                        <th>Descripción</th>
+                        <th>Existencia</th>
+                        <th>Estatus</th>
+                        <th>DanielGR</th>
+                        <th>JaimeHT</th>
+                        <th>JuanDiegoRV</th>
+                        <th>YisharJB</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr th:each="producto : ${productos}">
+
+                        <td>
+                            <img th:if="${producto.imagen != null}"
+                                 th:src="@{/img/{img}(img=${producto.imagen})}"
+                                 width="70"
+                                 height="70"
+                                 style="border-radius: 10px; object-fit: cover;">
+                        </td>
+
+                        <td th:text="${producto.descripcion}"></td>
+
+                        <td th:text="${producto.existencia}"></td>
+
+                        <td>
+                            <span class="category-tag"
+                                  th:text="${producto.estatus}">
+                            </span>
+                        </td>
+
+                        <td th:text="${producto.gustaDanielGR}"></td>
+                        <td th:text="${producto.gustaJaimeHT}"></td>
+                        <td th:text="${producto.gustaJuanDiegoRV}"></td>
+                        <td th:text="${producto.gustaYisharJB}"></td>
+
+                        <td>
+
+                            <a th:href="@{'/rutaProductos/editar/' + ${producto.uuid}}"
+                               class="btn btn-warning btn-sm">
+							   ✏️ Editar
+                            </a>
+
+                            <a th:href="@{'/rutaProductos/eliminar/' + ${producto.uuid}}"
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('¿Deseas eliminar este producto?')">
+							   ❌ Eliminar
+                            </a>
+
+                        </td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

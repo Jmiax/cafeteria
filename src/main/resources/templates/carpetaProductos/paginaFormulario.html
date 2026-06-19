@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Producto</title>
+
+    <th:block th:replace="~{fragmentos :: bootstrap}"></th:block>
+
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div th:replace="~{fragmentos :: menu}"></div>
+
+<div class="container mt-4">
+
+    <div class="table-container" style="max-width: 800px; margin: auto; padding: 35px;">
+
+        <!-- HEADER VISUAL -->
+        <div style="text-align:center; margin-bottom: 25px;">
+            <h2 class="table-title" th:text="${producto.uuid} != null ? '✏️ Editar Producto' : '➕ Nuevo Producto'"></h2>
+            <p style="color:#64748B;">Completa la información del producto</p>
+        </div>
+
+        <form th:action="${producto.uuid} == null ? @{/rutaProductos/guardar} : @{/rutaProductos/actualizar}"
+              th:object="${producto}"
+              method="post"
+              enctype="multipart/form-data">
+
+            <input type="hidden" th:field="*{uuid}">
+
+            <!-- GRID FORM -->
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+
+                <div class="mb-3">
+                    <label class="form-label">Descripción</label>
+                    <input type="text" class="form-control" th:field="*{descripcion}">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Existencia</label>
+                    <input type="number" class="form-control" th:field="*{existencia}">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Imagen</label>
+                    <input type="file" class="form-control" name="archivo" accept=".jpg,.jpeg,.png,.webp">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Estatus</label>
+                    <select class="form-select" th:field="*{estatus}">
+                        <option th:each="estado : ${estados}"
+                                th:value="${estado}"
+                                th:text="${estado}">
+                        </option>
+                    </select>
+                </div>
+
+            </div>
+
+            <!-- TARJETA DE PREFERENCIAS -->
+            <div style="margin-top: 25px; padding: 20px; border: 1px solid #BFDBFE; border-radius: 12px; background: #F8FCFF;">
+
+                <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+
+                    <input type="text" class="form-control" placeholder="Gusta a Daniel" th:field="*{gustaDanielGR}">
+                    <input type="text" class="form-control" placeholder="Gusta a Jaime" th:field="*{gustaJaimeHT}">
+                    <input type="text" class="form-control" placeholder="Gusta a Juan Diego" th:field="*{gustaJuanDiegoRV}">
+                    <input type="text" class="form-control" placeholder="Gusta a Yishar" th:field="*{gustaYisharJB}">
+
+                </div>
+            </div>
+
+            <!-- BOTONES -->
+            <div style="margin-top: 30px; display:flex; justify-content: space-between; align-items:center;">
+
+                <a th:href="@{/rutaProductos/listar}" class="btn btn-secondary">
+                    ← Cancelar
+                </a>
+
+                <button type="submit" class="btn-decorative">
+                    💾 Guardar Producto
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
