@@ -1,5 +1,5 @@
 package com.cafeteria.app.service;
 
-public class ProductoService {
+public class DetallePedidosService {
 
 }

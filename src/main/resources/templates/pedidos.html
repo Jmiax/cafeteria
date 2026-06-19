@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedidos</title>
+</head>
+<body>
+
+<h1>Lista de Pedidos</h1>
+
+<div id="lista-pedidos"></div>
+
+<script>
+async function cargarPedidos() {
+
+    const response = await fetch('pedidos');
+    const pedidos = await response.json();
+
+    let html = "";
+
+    pedidos.forEach(pedido => {
+        html += `
+            <div>
+                <h3>Pedido #${pedido.id}</h3>
+                <p>Total: $${pedido.total}</p>
+                <p>Fecha: ${pedido.fecha}</p>
+                <hr>
+            </div>
+        `;
+    });
+
+    document.getElementById("lista-pedidos").innerHTML = html;
+}
+
+cargarPedidos();
+</script>
+
+</body>
+</html>
