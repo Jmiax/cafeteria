@@ -4,6 +4,7 @@
 <head>
     <title>Sistema de Cafetería</title>
 
+    <link rel="stylesheet" th:href="@{/css/style.css}">
     <th:block th:replace="~{fragmentos :: bootstrap}"></th:block>
 </head>
 
@@ -11,6 +12,8 @@
 
     <div th:replace="~{fragmentos :: menu}"></div>
 
+    <section class="hero">
+        <div class="container hero-grid">
 
             <div class="hero-content">
                 <h2>Bienvenido al Sistema de Gestión de Cafetería</h2>
@@ -26,10 +29,9 @@
             </div>
 
             <div class="hero-image-container">
-                <img
-                    src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"
-                    alt="Cafetería"
-                    class="hero-image">
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085"
+                     alt="Cafetería"
+                     class="hero-image">
 
                 <div class="hero-image-overlay"></div>
             </div>
