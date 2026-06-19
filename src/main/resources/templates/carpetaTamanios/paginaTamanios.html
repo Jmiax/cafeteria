@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+	<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catálogo de Tamaños</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="logo-container">
+            <div class="logo-icon">📏</div>
+            <h1>Catálogo de <span>Tamaños</span></h1>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <h2>Gestión de Tamaños</h2>
+
+        <p>
+            Aquí se registrarán los tamaños disponibles para los productos
+            de la cafetería.
+        </p>
+
+        <br>
+
+        <a href="/" class="btn-decorative">
+            Regresar al inicio
+        </a>
+		<a href="/tamanios/nuevo" class="btn-decorative">
+		    Nuevo Tamaño
+		</a>
+		<div class="table-container" style="margin-top:30px;">
+
+		    <div class="table-header">
+		        <span class="table-title">Lista de Tamaños</span>
+		    </div>
+
+		    <table class="custom-table">
+		        <thead>
+		            <tr>
+		                <th>ID</th>
+		                <th>Nombre</th>
+		                <th>Capacidad</th>
+		                <th>Unidad</th>
+		                <th>Descripción</th>
+		            </tr>
+		        </thead>
+
+		        <tbody>
+		            <tr th:each="tam : ${tamanios}">
+		                <td th:text="${tam.idTamanio}"></td>
+		                <td th:text="${tam.nombre}"></td>
+		                <td th:text="${tam.capacidad}"></td>
+		                <td th:text="${tam.unidad}"></td>
+		                <td th:text="${tam.descripcion}"></td>
+		            </tr>
+		        </tbody>
+		    </table>
+
+		</div>
+    </div>
+</section>
+
+</body>
+</html>

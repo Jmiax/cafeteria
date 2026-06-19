@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuevo Tamaño</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header>
+    <div class="container">
+        <div class="logo-container">
+            <div class="logo-icon">📏</div>
+            <h1>Nuevo <span>Tamaño</span></h1>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+
+        <div class="form-card">
+            <h2>Registro de Tamaño</h2>
+            <p>Captura los datos del tamaño para los productos de la cafetería.</p>
+
+            <form th:action="@{/tamanios/guardar}" method="post" th:object="${tamanio}">
+
+                <div class="form-group">
+                    <label>Nombre:</label>
+                    <input type="text" th:field="*{nombre}" placeholder="Ejemplo: Grande">
+                </div>
+
+                <div class="form-group">
+                    <label>Capacidad:</label>
+                    <input type="number" th:field="*{capacidad}" placeholder="Ejemplo: 500">
+                </div>
+
+                <div class="form-group">
+                    <label>Unidad:</label>
+                    <input type="text" th:field="*{unidad}" placeholder="Ejemplo: ml">
+                </div>
+
+                <div class="form-group">
+                    <label>Descripción:</label>
+                    <textarea th:field="*{descripcion}" placeholder="Ejemplo: Vaso grande"></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-form">Guardar</button>
+                    <a href="/tamanios/listar" class="btn-form">Regresar</a>
+                </div>
+
+            </form>
+        </div>
+
+    </div>
+</section>
+
+</body>
+</html>
