@@ -1,94 +1,108 @@
 package com.cafeteria.app.dto;
 
 import java.util.UUID;
-
 import com.cafeteria.app.enums.Estatus;
-
-
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 public class ProductoDTO {
-	private UUID uuid;
-	private String descripcion;
-	private String imagen;
-	private Integer existencia;
-	private Estatus estatus;
-	private String gustaDanielGR;
-	
-	private String gustaJaimeHT;
-	
-	private String gustaJuanDiegoRV;
 
-	private String gustaYisharJB;
+    private UUID uuid;
 
-	public UUID getUuid() {
-		return uuid;
-	}
+    @NotBlank(message = "¡La descripción es obligatoria!")
+    private String descripcion;
 
-	public void setUuid(UUID uuid) {
-		this.uuid = uuid;
-	}
+    private String imagen;
 
-	public String getDescripcion() {
-		return descripcion;
-	}
+    @NotNull(message = "¡La existencia es obligatoria!")
+    @Min(value = 0, message = "¡No puede ser negativo!")
+    private Integer existencia;
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
+    @NotNull(message = "¡Debes seleccionar un estatus!")
+    private Estatus estatus;
 
-	public String getImagen() {
-		return imagen;
-	}
+    @NotBlank(message = "¡Este campo es obligatorio!")
+    private String gustaDanielGR;
 
-	public void setImagen(String imagen) {
-		this.imagen = imagen;
-	}
+    @NotBlank(message = "¡Este campo es obligatorio!")
+    private String gustaJaimeHT;
 
-	public Integer getExistencia() {
-		return existencia;
-	}
+    @NotBlank(message = "¡Este campo es obligatorio!")
+    private String gustaJuanDiegoRV;
 
-	public void setExistencia(Integer existencia) {
-		this.existencia = existencia;
-	}
+    @NotBlank(message = "¡Este campo es obligatorio!")
+    private String gustaYisharJB;
 
-	public Estatus getEstatus() {
-		return estatus;
-	}
+    public UUID getUuid() {
+        return uuid;
+    }
 
-	public void setEstatus(Estatus estatus) {
-		this.estatus = estatus;
-	}
+    public void setUuid(UUID uuid) {
+        this.uuid = uuid;
+    }
 
-	public String getGustaDanielGR() {
-		return gustaDanielGR;
-	}
+    public String getDescripcion() {
+        return descripcion;
+    }
 
-	public void setGustaDanielGR(String gustaDanielGR) {
-		this.gustaDanielGR = gustaDanielGR;
-	}
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
 
-	public String getGustaJaimeHT() {
-		return gustaJaimeHT;
-	}
+    public String getImagen() {
+        return imagen;
+    }
 
-	public void setGustaJaimeHT(String gustaJaimeHT) {
-		this.gustaJaimeHT = gustaJaimeHT;
-	}
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
 
-	public String getGustaJuanDiegoRV() {
-		return gustaJuanDiegoRV;
-	}
+    public Integer getExistencia() {
+        return existencia;
+    }
 
-	public void setGustaJuanDiegoRV(String gustaJuanDiegoRV) {
-		this.gustaJuanDiegoRV = gustaJuanDiegoRV;
-	}
+    public void setExistencia(Integer existencia) {
+        this.existencia = existencia;
+    }
 
-	public String getGustaYisharJB() {
-		return gustaYisharJB;
-	}
+    public Estatus getEstatus() {
+        return estatus;
+    }
 
-	public void setGustaYisharJB(String gustaYisharJB) {
-		this.gustaYisharJB = gustaYisharJB;
-	}
+    public void setEstatus(Estatus estatus) {
+        this.estatus = estatus;
+    }
+
+    public String getGustaDanielGR() {
+        return gustaDanielGR;
+    }
+
+    public void setGustaDanielGR(String gustaDanielGR) {
+        this.gustaDanielGR = gustaDanielGR;
+    }
+
+    public String getGustaJaimeHT() {
+        return gustaJaimeHT;
+    }
+
+    public void setGustaJaimeHT(String gustaJaimeHT) {
+        this.gustaJaimeHT = gustaJaimeHT;
+    }
+
+    public String getGustaJuanDiegoRV() {
+        return gustaJuanDiegoRV;
+    }
+
+    public void setGustaJuanDiegoRV(String gustaJuanDiegoRV) {
+        this.gustaJuanDiegoRV = gustaJuanDiegoRV;
+    }
+
+    public String getGustaYisharJB() {
+        return gustaYisharJB;
+    }
+
+    public void setGustaYisharJB(String gustaYisharJB) {
+        this.gustaYisharJB = gustaYisharJB;
+    }
 }

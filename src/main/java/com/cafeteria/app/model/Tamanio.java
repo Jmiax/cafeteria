@@ -2,6 +2,7 @@ package com.cafeteria.app.model;
 
 import java.util.UUID;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +17,7 @@ public class Tamanio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idTamanio;
 
+    @Column(unique = true)
     private UUID uuid;
     private String nombre;
     private Integer capacidad;

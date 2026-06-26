@@ -3,10 +3,8 @@
 
 <head>
     <title>Producto</title>
-
     <th:block th:replace="~{fragmentos :: bootstrap}"></th:block>
-
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 
 <body>
@@ -15,12 +13,11 @@
 
 <div class="container mt-4">
 
-    <div class="table-container" style="max-width: 800px; margin: auto; padding: 35px;">
+    <div class="form-card form-producto">
 
-        <!-- HEADER VISUAL -->
-        <div style="text-align:center; margin-bottom: 25px;">
-            <h2 class="table-title" th:text="${producto.uuid} != null ? '✏️ Editar Producto' : '➕ Nuevo Producto'"></h2>
-            <p style="color:#64748B;">Completa la información del producto</p>
+        <div class="form-header text-center">
+            <h2 th:text="${producto.uuid} != null ? 'Editar Producto' : 'Nuevo Producto'"></h2>
+            <p>Completa la información del producto</p>
         </div>
 
         <form th:action="${producto.uuid} == null ? @{/rutaProductos/guardar} : @{/rutaProductos/actualizar}"
@@ -30,58 +27,83 @@
 
             <input type="hidden" th:field="*{uuid}">
 
-            <!-- GRID FORM -->
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="form-grid">
 
-                <div class="mb-3">
-                    <label class="form-label">Descripción</label>
-                    <input type="text" class="form-control" th:field="*{descripcion}">
+                <div class="form-group">
+                    <label>Descripción</label>
+                    <input type="text" th:field="*{descripcion}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Existencia</label>
-                    <input type="number" class="form-control" th:field="*{existencia}">
+                <div class="form-group">
+                    <label>Existencia</label>
+                    <input type="number" th:field="*{existencia}">
+                    <div class="text-danger" th:if="${#fields.hasErrors('existencia')}" th:errors="*{existencia}"></div>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label">Imagen</label>
-                    <input type="file" class="form-control" name="archivo" accept=".jpg,.jpeg,.png,.webp">
-                </div>
+				
+				<div class="form-group">
+				    <label>Imagen</label>
+				    <input type="file" name="archivo" accept=".jpg,.jpeg,.png,.webp">
 
-                <div class="mb-3">
-                    <label class="form-label">Estatus</label>
-                    <select class="form-select" th:field="*{estatus}">
+				    <div th:if="${producto.imagen != null}">
+				        <p>Imagen actual:</p>
+				        <img th:src="@{'/img/' + ${producto.imagen}}"
+				             style="width:120px; margin-top:10px; border-radius:10px;">
+				    </div>
+				</div>
+
+                <div class="form-group">
+                    <label>Estatus</label>
+                    <select th:field="*{estatus}">
                         <option th:each="estado : ${estados}"
                                 th:value="${estado}"
                                 th:text="${estado}">
                         </option>
                     </select>
+                    <div class="text-danger" th:if="${#fields.hasErrors('estatus')}" th:errors="*{estatus}"></div>
                 </div>
 
             </div>
 
-            <!-- TARJETA DE PREFERENCIAS -->
-            <div style="margin-top: 25px; padding: 20px; border: 1px solid #BFDBFE; border-radius: 12px; background: #F8FCFF;">
+            <div class="form-section-box">
 
-                <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                <h4>Preferencias</h4>
 
-                    <input type="text" class="form-control" placeholder="Gusta a Daniel" th:field="*{gustaDanielGR}">
-                    <input type="text" class="form-control" placeholder="Gusta a Jaime" th:field="*{gustaJaimeHT}">
-                    <input type="text" class="form-control" placeholder="Gusta a Juan Diego" th:field="*{gustaJuanDiegoRV}">
-                    <input type="text" class="form-control" placeholder="Gusta a Yishar" th:field="*{gustaYisharJB}">
+                <div class="form-grid">
+
+                    <div>
+                        <input type="text" placeholder="Gusta a Daniel" th:field="*{gustaDanielGR}">
+                        <div class="text-danger" th:if="${#fields.hasErrors('gustaDanielGR')}" th:errors="*{gustaDanielGR}"></div>
+                    </div>
+
+                    <div>
+                        <input type="text" placeholder="Gusta a Jaime" th:field="*{gustaJaimeHT}">
+                        <div class="text-danger" th:if="${#fields.hasErrors('gustaJaimeHT')}" th:errors="*{gustaJaimeHT}"></div>
+                    </div>
+
+                    <div>
+                        <input type="text" placeholder="Gusta a Juan Diego" th:field="*{gustaJuanDiegoRV}">
+                        <div class="text-danger" th:if="${#fields.hasErrors('gustaJuanDiegoRV')}" th:errors="*{gustaJuanDiegoRV}"></div>
+                    </div>
+
+                    <div>
+                        <input type="text" placeholder="Gusta a Yishar" th:field="*{gustaYisharJB}">
+                        <div class="text-danger" th:if="${#fields.hasErrors('gustaYisharJB')}" th:errors="*{gustaYisharJB}"></div>
+                    </div>
 
                 </div>
+
             </div>
 
-            <!-- BOTONES -->
-            <div style="margin-top: 30px; display:flex; justify-content: space-between; align-items:center;">
+            <div class="form-actions">
 
-                <a th:href="@{/rutaProductos/listar}" class="btn btn-secondary">
-                    ← Cancelar
+                <a th:href="@{/rutaProductos/listar}" class="btn-cancel">
+                   Cancelar
                 </a>
 
-                <button type="submit" class="btn-decorative">
-                    💾 Guardar Producto
+                <button type="submit" class="btn-form">
+                  Guardar Producto
                 </button>
 
             </div>

@@ -2,13 +2,24 @@ package com.cafeteria.app.dto;
 
 import java.util.UUID;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class TamanioDTO {
 
     private Long idTamanio;
     private UUID uuid;
+
+    @NotBlank(message = "¡El nombre es obligatorio!")
     private String nombre;
+
+    @NotNull(message = "¡La capacidad es obligatoria!")
     private Integer capacidad;
+
+    @NotBlank(message = "¡La unidad es obligatoria!")
     private String unidad;
+
+    @NotBlank(message = "¡La descripción es obligatoria!")
     private String descripcion;
 
     public Long getIdTamanio() {

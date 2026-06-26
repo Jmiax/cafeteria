@@ -24,96 +24,110 @@ import com.cafeteria.app.enums.Estatus;
 import com.cafeteria.app.service.ProductoService;
 
 import jakarta.validation.Valid;
+
 @Controller
 @RequestMapping("rutaProductos")
 public class ProductoController {
-	@Autowired
-	ProductoService productoService;
-	
-	@GetMapping("listar")
-	public String metodoListar(Model model) {
-		model.addAttribute("mensaje","Hola"); 
-		model.addAttribute("productos", productoService.listar()); 
-		return "/carpetaProductos/paginaProductos";
-	}
-	
-	@GetMapping("nuevo")
-	public String metodoNuevo(Model model){
-		model.addAttribute("estados",Estatus.values());
-		model.addAttribute("producto",new ProductoDTO());
-		return "/carpetaProductos/paginaFormulario";
-	}
-	@PostMapping("guardar")
-	public String metodoGuardar(
-	        @Valid @ModelAttribute("producto") ProductoDTO producto,
-	        BindingResult result,
-	        @RequestParam("archivo") MultipartFile archivo,
-	        Model model) throws IOException {
 
-	    if (result.hasErrors()) {
-	        model.addAttribute("estados", Estatus.values());
-	        return "/carpetaProductos/paginaFormulario";
-	    }
+    @Autowired
+    ProductoService productoService;
 
-	    if (!archivo.isEmpty()) {
+    @GetMapping("listar")
+    public String metodoListar(Model model) {
+        model.addAttribute("productos", productoService.listar());
+        return "/carpetaProductos/paginaProductos";
+    }
 
-	        String nombreArchivo = archivo.getOriginalFilename();
+    @GetMapping("nuevo")
+    public String metodoNuevo(Model model) {
+        model.addAttribute("estados", Estatus.values());
+        model.addAttribute("producto", new ProductoDTO());
+        return "/carpetaProductos/paginaFormulario";
+    }
 
-	        Path ruta = Paths.get("src/main/resources/static/img/" + nombreArchivo);
+    @PostMapping("guardar")
+    public String metodoGuardar(
+            @Valid @ModelAttribute("producto") ProductoDTO producto,
+            BindingResult result,
+            @RequestParam("archivo") MultipartFile archivo,
+            Model model) throws IOException {
 
-	        Files.copy(
-	                archivo.getInputStream(),
-	                ruta,
-	                StandardCopyOption.REPLACE_EXISTING);
+        if (result.hasErrors()) {
+            model.addAttribute("estados", Estatus.values());
+            return "/carpetaProductos/paginaFormulario";
+        }
 
-	        producto.setImagen(nombreArchivo);
-	    }
+        if (!archivo.isEmpty()) {
 
-	    productoService.guardar(producto);
+            String nombreArchivo = archivo.getOriginalFilename();
 
-	    return "redirect:/rutaProductos/listar";
-	}
-	
-	@GetMapping("editar/{uuid}")
-	public String metodoEditar(Model model, @PathVariable UUID uuid) {
-		model.addAttribute("estados",Estatus.values());
-		model.addAttribute("producto",productoService.obtenerProductoUUID(uuid));
-		return "/carpetaProductos/paginaFormulario";
-	}
-	
-	@PostMapping("actualizar")
-	public String metodoActualiza(
-	        @Valid @ModelAttribute("producto") ProductoDTO producto,
-	        BindingResult result,
-	        @RequestParam("archivo") MultipartFile archivo,
-	        Model model) throws IOException {
+            Path ruta = Paths.get("C:/imagenes/" + nombreArchivo);
 
-	    if (result.hasErrors()) {
-	        model.addAttribute("estados", Estatus.values());
-	        return "/carpetaProductos/paginaFormulario";
-	    }
+            Files.copy(
+                    archivo.getInputStream(),
+                    ruta,
+                    StandardCopyOption.REPLACE_EXISTING);
 
-	    if (!archivo.isEmpty()) {
+            producto.setImagen(nombreArchivo);
+        }
 
-	        String nombreArchivo = archivo.getOriginalFilename();
+        productoService.guardar(producto);
 
-	        Path ruta = Paths.get("src/main/resources/static/img/" + nombreArchivo);
+        return "redirect:/rutaProductos/listar";
+    }
+    @GetMapping("editar/{uuid}")
+    public String metodoEditar(Model model, @PathVariable UUID uuid) {
+        model.addAttribute("estados", Estatus.values());
+        model.addAttribute("producto", productoService.obtenerProductoUUID(uuid));
+        return "/carpetaProductos/paginaFormulario";
+    }
 
-	        Files.copy(
-	                archivo.getInputStream(),
-	                ruta,
-	                StandardCopyOption.REPLACE_EXISTING);
+    @PostMapping("actualizar")
+    public String metodoActualiza(
+            @Valid @ModelAttribute("producto") ProductoDTO producto,
+            BindingResult result,
+            @RequestParam("archivo") MultipartFile archivo,
+            Model model) throws IOException {
 
-	        producto.setImagen(nombreArchivo);
-	    }
+        if (result.hasErrors()) {
+            model.addAttribute("estados", Estatus.values());
 
-	    productoService.actualiza(producto);
+            ProductoDTO existente = productoService.obtenerProductoUUID(producto.getUuid());
+            if (existente != null) {
+                producto.setImagen(existente.getImagen());
+            }
 
-	    return "redirect:/rutaProductos/listar";
-	}
-	@GetMapping("eliminar/{uuid}")
-	public String metodoElimina(@PathVariable UUID uuid) {
-	    productoService.borrar(uuid);
-	    return "redirect:/rutaProductos/listar";
-	}
+            return "/carpetaProductos/paginaFormulario";
+        }
+
+        if (!archivo.isEmpty()) {
+
+            String nombreArchivo = archivo.getOriginalFilename();
+
+            Path ruta = Paths.get("C:/imagenes/" + nombreArchivo);
+
+            Files.copy(
+                    archivo.getInputStream(),
+                    ruta,
+                    StandardCopyOption.REPLACE_EXISTING);
+
+            producto.setImagen(nombreArchivo);
+
+        } else {
+
+            ProductoDTO existente = productoService.obtenerProductoUUID(producto.getUuid());
+            if (existente != null) {
+                producto.setImagen(existente.getImagen());
+            }
+        }
+
+        productoService.actualiza(producto);
+
+        return "redirect:/rutaProductos/listar";
+    }
+    @GetMapping("eliminar/{uuid}")
+    public String metodoElimina(@PathVariable UUID uuid) {
+        productoService.borrar(uuid);
+        return "redirect:/rutaProductos/listar";
+    }
 }

@@ -1,64 +1,97 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
-	<head>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Catálogo de Tamaños</title>
 
-    <link rel="stylesheet" href="/css/style.css">
+    <div th:replace="~{fragmentos :: bootstrap}"></div>
+
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
+
 <body>
 
-	<div th:replace="~{fragmentos :: menu}"></div>
+<div th:replace="~{fragmentos :: menu}"></div>
 
-<section class="hero">
-    <div class="container">
-        <h2>Gestión de Tamaños</h2>
+<div class="container mt-4">
 
-        <p>
-            Aquí se registrarán los tamaños disponibles para los productos
-            de la cafetería.
-        </p>
-
-        <br>
-
-        <a href="/" class="btn-decorative">
-            Regresar al inicio
-        </a>
-		<a href="/tamanios/nuevo" class="btn-decorative">
-		    Nuevo Tamaño
-		</a>
-		<div class="table-container" style="margin-top:30px;">
-
-		    <div class="table-header">
-		        <span class="table-title">Lista de Tamaños</span>
-		    </div>
-
-		    <table class="custom-table">
-		        <thead>
-		            <tr>
-		                <th>ID</th>
-		                <th>Nombre</th>
-		                <th>Capacidad</th>
-		                <th>Unidad</th>
-		                <th>Descripción</th>
-		            </tr>
-		        </thead>
-
-		        <tbody>
-		            <tr th:each="tam : ${tamanios}">
-		                <td th:text="${tam.idTamanio}"></td>
-		                <td th:text="${tam.nombre}"></td>
-		                <td th:text="${tam.capacidad}"></td>
-		                <td th:text="${tam.unidad}"></td>
-		                <td th:text="${tam.descripcion}"></td>
-		            </tr>
-		        </tbody>
-		    </table>
-
-		</div>
+    <!-- HEADER (IGUAL A CATEGORÍAS) -->
+    <div class="page-header">
+        <h2>Catálogo de Tamaños</h2>
+        <p>Listado y administración de tamaños de productos</p>
     </div>
-</section>
+
+    <!-- BOTÓN (MISMA ESTRUCTURA) -->
+    <div class="table-header">
+
+        <span class="table-title">Tamaños registrados</span>
+
+        <a th:href="@{/tamanios/nuevo}" class="btn-decorative">
+            ➕ Nuevo Tamaño
+        </a>
+
+    </div>
+
+    <!-- TABLA (IGUAL A CATEGORÍAS) -->
+    <div class="table-container">
+
+        <table class="custom-table" th:if="${not #lists.isEmpty(tamanios)}">
+
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Capacidad</th>
+                <th>Unidad</th>
+                <th>Descripción</th>
+                <th>Acciones</th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            <tr th:each="t : ${tamanios}">
+
+                <td th:text="${t.nombre}" class="fw-bold"></td>
+
+                <td th:text="${t.capacidad}"></td>
+
+                <td th:text="${t.unidad}"></td>
+
+                <td th:text="${t.descripcion}"></td>
+
+                <td class="actions">
+
+                    <a th:href="@{/tamanios/editar/{uuid}(uuid=${t.uuid})}"
+                       class="btn-edit">
+                        ✏️
+                    </a>
+
+                    <a th:href="@{/tamanios/eliminar/{uuid}(uuid=${t.uuid})}"
+                       class="btn-delete"
+                       onclick="return confirm('¿Eliminar este tamaño?');">
+                        ❌
+                    </a>
+
+                </td>
+
+            </tr>
+
+            </tbody>
+
+        </table>
+
+        <!-- EMPTY STATE (IGUAL A CATEGORÍAS) -->
+        <div th:if="${#lists.isEmpty(tamanios)}" class="empty-state">
+            <h3>No hay tamaños registrados</h3>
+            <p>Agrega un nuevo tamaño para comenzar</p>
+        </div>
+
+    </div>
+
+</div>
 
 </body>
 </html>
