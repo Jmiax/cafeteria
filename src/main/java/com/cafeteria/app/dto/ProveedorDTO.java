@@ -9,17 +9,17 @@ public class ProveedorDTO {
 
     private UUID uuid;
 
-    @NotBlank(message = "¡El nombre de la empresa es obligatorio!")
+    @NotBlank(message = "¡Este campo es obligatorio!")
     private String nombreEmpresa;
 
-    @NotBlank(message = "¡El teléfono es obligatorio!")
+    @NotBlank(message = "¡Este campo es obligatorio!")
     private String telefono;
 
-    @NotBlank(message = "¡El correo es obligatorio!")
+    @NotBlank(message = "¡Este campo es obligatorio!")
     @Email(message = "¡Ingresa un correo válido!")
     private String correo;
 
-    @NotBlank(message = "!La dirección es obligatoria!")
+    @NotBlank(message = "!Este campo es obligatorio!")
     private String direccion;
 
     public UUID getUuid() {
