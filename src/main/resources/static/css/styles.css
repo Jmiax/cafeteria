@@ -407,3 +407,37 @@ header .container {
     display: block;
     object-fit: cover;
 }
+.dropdown {
+    position: relative;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #ffffff;
+    min-width: 190px;
+    list-style: none;
+    padding: 8px 0;
+    border-radius: 10px;
+    box-shadow: var(--shadow-soft);
+    z-index: 9999;
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: 10px 15px;
+    color: var(--color-text-dark);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.dropdown-menu li a:hover {
+    background: var(--bg-secondary);
+    color: var(--color-primary-dark);
+}
